@@ -27,7 +27,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 
-find_package(Boost 1.74.0 COMPONENTS program_options)
+find_package(Boost 1.71.0 COMPONENTS program_options)
 
 configure_file(
     ${PROJECT_SOURCE_DIR}/src/config.h.in
