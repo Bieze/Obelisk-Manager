@@ -6,6 +6,8 @@ enable_testing()
 
 add_executable(Obelisk ${PROJECT_SOURCE_DIR}/src/main.cpp)
 
+add_test(NAME ObeliskRun COMMAND Obelisk)
+
 execute_process(
     COMMAND git log -1 --format=%h
     WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
