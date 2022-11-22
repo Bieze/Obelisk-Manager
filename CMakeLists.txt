@@ -4,7 +4,7 @@ project(Obelisk VERSION 0.1.2 LANGUAGES CXX)
 include(CTest)
 enable_testing()
 
-add_executable(Obelisk ${PROJECT_SOURCE_DIR}/src/main.cpp)
+add_executable(Obelisk ${PROJECT_SOURCE_DIR}/src/main.cpp ${PROJECT_SOURCE_DIR}/src/SettingsLocation.hpp)
 
 add_test(NAME ObeliskRun COMMAND Obelisk)
 
@@ -24,12 +24,25 @@ add_custom_target(AlwaysCheckGit COMMAND ${CMAKE_COMMAND}
     BYPRODUCTS ${post_configure_file}
 )
 
+# If it's not MacOS then it's LINUX
+if(UNIX AND NOT APPLE)
+    set(LINUX TRUE)
+endif()
+
+if(LINUX) 
+    # linux stuff here
+    file(TO_CMAKE_PATH $ENV{HOME}/.config CONFIG_DIR)
+elseif(WIN32)
+    # windows stuf here
+    file(TO_CMAKE_PATH $ENV{APPDATA}/obelisk-manager CONFIG_DIR)
+endif()
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 
-find_package(Boost 1.71.0 COMPONENTS program_options)
+find_package(Boost 1.71.0 COMPONENTS program_options filesystem)
 
 configure_file(
     ${PROJECT_SOURCE_DIR}/src/config.h.in
@@ -43,7 +56,9 @@ include_directories(
 target_link_libraries(
     Obelisk
     Boost::program_options
+    Boost::filesystem
 )
 
 
 include(CPack)
+

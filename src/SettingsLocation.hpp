@@ -10,7 +10,21 @@ Obelisk manager is distributed in the hope that it will be useful, but WITHOUT A
 
 You should have received a copy of the GNU General Public License along with Obelisk manager. If not, see <https://www.gnu.org/licenses/>.
 */
-#define PROJECT_NAME "@PROJECT_NAME@"
-#define PROJECT_VER  "@PROJECT_VERSION@"
-#define PROJECT_HASH "@GIT_HASH@"
-#define PROJECT_CONFIG_DIR "@CONFIG_DIR@"
+#include <iostream>
+#include "config.h"
+#include <boost/filesystem.hpp>
+
+using namespace std;
+namespace ofs = boost::filesystem;
+
+int SettingsLocationInit() {
+
+    string confLoc = string(PROJECT_CONFIG_DIR);
+
+    if (ofs::is_directory(confLoc) == true) {
+        ;
+    } else {
+        ofs::create_directory(PROJECT_CONFIG_DIR);
+    }
+    return 0;
+}
