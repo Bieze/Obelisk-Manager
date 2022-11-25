@@ -20,7 +20,7 @@ namespace ofs = boost::filesystem;
 
 int createSettingsFiles() {
     if (!ofs::exists(PROJECT_AUTH_PA)) {
-        ofs::fstream out(PROJECT_AUTH_PA);
+        ofs::ofstream AUTH_PA(PROJECT_AUTH_PA);
     } else {
         ;
     }
