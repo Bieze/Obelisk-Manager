@@ -32,7 +32,7 @@ endif()
 if(LINUX) 
     # linux stuff here
     file(TO_CMAKE_PATH $ENV{HOME}/.config/obelisk-manager CONFIG_DIR)
-    file(TO_CMAKE_PATH $ENV{HOME}/.config/obelisk-manager/MASTER_PA CONFIG_DIR)
+    file(TO_CMAKE_PATH $ENV{HOME}/.config/obelisk-manager/MASTER_PA AUTH_PA)
 elseif(WIN32)
     # windows stuf here
     file(TO_CMAKE_PATH $ENV{APPDATA}/obelisk-manager/ CONFIG_DIR)
