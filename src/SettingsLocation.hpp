@@ -10,33 +10,79 @@ Obelisk manager is distributed in the hope that it will be useful, but WITHOUT A
 
 You should have received a copy of the GNU General Public License along with Obelisk manager. If not, see <https://www.gnu.org/licenses/>.
 */
+
+#include <conio.h>
 #include <iostream>
 #include "config.h"
-#include <boost/filesystem/fstream.hpp>
+#include "base64.hpp"
+#include "takeUserPassword.hpp"
 #include <boost/filesystem.hpp>
+#include <SQLiteCpp/SQLiteCpp.h>
+#include <boost/filesystem/fstream.hpp>
 
 using namespace std;
 namespace ofs = boost::filesystem;
 
-int createSettingsFiles() {
-    if (!ofs::exists(PROJECT_AUTH_PA)) {
-        ofs::ofstream AUTH_PA(PROJECT_AUTH_PA);
-    } else {
-        ;
+int createSettingsFiles()
+{
+    try
+    {
+
+        if (!ofs::exists(PROJECT_AUTH_PA))
+        {
+
+            ofs::ofstream AUTH_PA(PROJECT_AUTH_PA);
+            ofs::permissions(PROJECT_AUTH_PA, ofs::perms::owner_all);
+            cout << "Thank your for using Obelisk Manager, since the database has just been created\n";
+            cout << "Has been wiped out and reset,   we have to create an admin password to protect\n";
+            cout << "Sensitive information stored,   this  means that the password should be strong\n";
+            cout << "And can't be shared with anyone else.\n";
+
+            cout << "Enter password: ";
+
+            string input = takePasswdFromUser();
+            string encodedInput = encode64(input);
+
+            SQLite::Database db(PROJECT_AUTH_PA, SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
+
+            SQLite::Transaction transaction(db);
+            db.exec("CREATE TABLE \"passwords\" (\"website\"	TEXT, \"username\"	TEXT, \"password\"	TEXT);");
+
+            db.exec("INSERT INTO passwords (website, username, password) VALUES ('obelisk-manager', 'admin', '" + encodedInput + "');");
+
+            transaction.commit();
+            return 0;
+        }
+
+        else
+        {
+            return 0;
+        }
     }
+    catch (exception &e)
+    {
+        cout << "[1] " << e.what() << endl;
+        return 1;
+    }
+
     return 0;
 }
 
-int SettingsLocationInit() {
+int SettingsLocationInit()
+{
 
     string confLoc = string(PROJECT_CONFIG_DIR);
 
-    if (ofs::is_directory(PROJECT_CONFIG_DIR)) {
+    if (ofs::is_directory(PROJECT_CONFIG_DIR))
+    {
         createSettingsFiles();
-    } else {
+        ofs::permissions(PROJECT_CONFIG_DIR, ofs::perms::owner_all);
+    }
+    else
+    {
         ofs::create_directory(PROJECT_CONFIG_DIR);
+        ofs::permissions(PROJECT_CONFIG_DIR, ofs::perms::owner_all);
         createSettingsFiles();
-
     }
     return 0;
 }
