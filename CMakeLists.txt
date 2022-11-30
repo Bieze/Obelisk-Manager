@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.0)
-project(Obelisk VERSION 0.1.6 LANGUAGES CXX)
+project(Obelisk VERSION 0.1.7 LANGUAGES CXX)
 
 include(CTest)
 enable_testing()
