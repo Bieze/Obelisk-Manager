@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License along with Obe
 #include "base64.hpp"
 #include "takeUserPassword.hpp"
 #include <boost/filesystem.hpp>
-#include <SQLiteCpp/SQLiteCpp.h>
+#include "SQLiteCpp/SQLiteCpp.h"
 #include <boost/filesystem/fstream.hpp>
 
 using namespace std;
