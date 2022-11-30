@@ -14,8 +14,13 @@ You should have received a copy of the GNU General Public License along with Obe
 #ifndef TAKE_USER_PASS
 #define TAKE_USER_PASS
 
-#include <conio.h>
 #include <iostream>
+
+#ifdef _WIN32
+#include <conio.h>
+#elif __linux
+#include <curses.h>
+#endif
 
 using namespace std;
 
