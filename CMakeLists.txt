@@ -34,6 +34,7 @@ if(LINUX)
     # linux stuff here
     file(TO_CMAKE_PATH $ENV{HOME}/.config/obelisk-manager CONFIG_DIR)
     file(TO_CMAKE_PATH $ENV{HOME}/.config/obelisk-manager/DATA.db3 AUTH_PA)
+    add_compile_options(-I /usr/local/include)
 elseif(WIN32)
     # windows stuf here
     file(TO_CMAKE_PATH $ENV{LOCALAPPDATA}/obelisk-manager/ CONFIG_DIR)
