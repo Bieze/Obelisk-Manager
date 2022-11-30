@@ -11,32 +11,32 @@ Obelisk manager is distributed in the hope that it will be useful, but WITHOUT A
 You should have received a copy of the GNU General Public License along with Obelisk manager. If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include "config.h"
-#include <iostream>
-#include "base64.hpp"
-#include "takeUserPassword.hpp" 
-#include <SQLiteCpp/SQLiteCpp.h>
+#ifndef TAKE_USER_PASS
+#define TAKE_USER_PASS
 
+#include <conio.h>
+#include <iostream>
 
 using namespace std;
 
-int VerifyPass() {
-    cout << "Enter admin password: ";
-    string input = takePasswdFromUser();
-    SQLite::Database db(PROJECT_AUTH_PA, SQLite::OPEN_READONLY);
-    SQLite::Statement query(db, "SELECT * FROM passwords WHERE website = 'obelisk-manager'");
+inline string takePasswdFromUser()
+{
+    string ipt = "";
+    char ipt_ch;
+    while (true)
+    {
+        ipt_ch = getch();
 
-
-    query.executeStep();
-    string password = query.getColumn(2);
-    if (encode64(input) == password) {
-        ;
-    } else {
-        cout << "[1] Incorrect password!";
-        exit(1);
+        // Check whether user enters
+        // a special non-printable
+        // character
+        if (ipt_ch < 32)
+        {
+            cout << endl;
+            return ipt;
+        }
+        ipt.push_back(ipt_ch);
     }
-
-    
-
-    return 0;
 }
+
+#endif
