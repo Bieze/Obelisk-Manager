@@ -11,7 +11,6 @@ Obelisk manager is distributed in the hope that it will be useful, but WITHOUT A
 You should have received a copy of the GNU General Public License along with Obelisk manager. If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include <conio.h>
 #include <iostream>
 #include "config.h"
 #include "base64.hpp"
