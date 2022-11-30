@@ -25,11 +25,6 @@ jobs:
       run: cd /tmp/SQLiteCpp && cmake -S . -B build -DCMAKE_INSTALL_PREFIX=/usr/local && cmake --build build && sudo cmake --install build
 
     - uses: actions/checkout@v3
-    
-    - name: run-vcpkg
-      uses: lukka/run-vcpkg@v10.6
-      with:
-        runVcpkgInstall: sqlitecpp
 
 
     - name: Configure CMake
