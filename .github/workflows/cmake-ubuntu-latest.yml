@@ -20,6 +20,9 @@ jobs:
     steps:
     - name: Install dependencies
       run: sudo apt-get install libboost-all-dev
+      run: cd /tmp && git clone https://github.com/SRombauts/SQLiteCpp.git
+      run: cd /tmp/SQLiteCpp && git submodule init && git submodule update
+      run: cd /tmp/SQLiteCpp && cmake -S . -B build -DCMAKE_INSTALL_PREFIX=/usr/local && cmake --build build && sudo cmake --install build
 
     - uses: actions/checkout@v3
 
