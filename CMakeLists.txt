@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.0)
-project(Obelisk VERSION 0.1.6 LANGUAGES CXX)
+project(Obelisk VERSION 0.1.7 LANGUAGES CXX)
 
 include(CTest)
 enable_testing()
@@ -34,6 +34,7 @@ if(LINUX)
     # linux stuff here
     file(TO_CMAKE_PATH $ENV{HOME}/.config/obelisk-manager CONFIG_DIR)
     file(TO_CMAKE_PATH $ENV{HOME}/.config/obelisk-manager/DATA.db3 AUTH_PA)
+    add_compile_options(-I /usr/local/include)
 elseif(WIN32)
     # windows stuf here
     file(TO_CMAKE_PATH $ENV{LOCALAPPDATA}/obelisk-manager/ CONFIG_DIR)
@@ -43,6 +44,10 @@ endif()
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
+set(SQLITECPP_RUN_CPPCHECK OFF CACHE BOOL "" FORCE)
+set(SQLITECPP_RUN_CPPLINT OFF CACHE BOOL "" FORCE)
+add_subdirectory(${PROJECT_SOURCE_DIR}/SQLiteCpp)
+
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 
 find_package(Boost 1.71.0 REQUIRED COMPONENTS program_options filesystem)
