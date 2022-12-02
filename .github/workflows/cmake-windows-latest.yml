@@ -24,6 +24,7 @@ jobs:
     steps:
     - uses: msys2/setup-msys2@v2
       with:
+        release: false
         update: true
         install:
           base-devel
@@ -39,9 +40,10 @@ jobs:
 
     
     - name: Configure CMake
+    - shell: powershell
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
-      run: mkdir build && cd build && cmake -E env CXXFLAGS="-Wall -Wextra -Werror" cmake .. 
+      run: mkdir build && cd build && cmake -E env CXXFLAGS="-Wall -Wextra -Werror" cmake .. -DCMAKE_CXX_COMPILER:FILEPATH=C:\msys64\mingw64\bin\g++.exe -DCMAKE_C_COMPILER:FILEPATH=C:\msys64\mingw64\bin\gcc.exe
 
     - name: Build progarm
       # Build your program with the given configuration
