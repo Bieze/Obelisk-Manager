@@ -15,9 +15,9 @@ You should have received a copy of the GNU General Public License along with Obe
 #define TAKE_USER_PASS
 
 #include <iostream>
-#ifdef __MINGW32__
+#ifdef __WIN32
 #include <conio.h>
-#elif __linux
+#elif __linux__
 #include "unix-getch.hpp"
 #elif __APPLE__
 #include "unix-getch.hpp"
