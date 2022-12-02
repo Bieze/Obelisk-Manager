@@ -27,7 +27,7 @@ jobs:
         update: true
         install:
           base-devel
-          x86_64-w64-mingw32-g++
+          mingw-w64-ucrt-x86_64-gcc
           cmake
           git
           mingw-w64-x86_64-boost
