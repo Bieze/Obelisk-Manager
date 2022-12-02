@@ -27,7 +27,9 @@ jobs:
       uses: MarkusJx/install-boost@v2.4.1
       id: install-boost
       with:
+        toolset: gcc
         boost_version: 1.80.0
+        boost_install_dir: D:\a\_temp\msys64
 
     - uses: actions/checkout@v3
       with:
