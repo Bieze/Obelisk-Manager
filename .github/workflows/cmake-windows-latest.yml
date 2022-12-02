@@ -33,7 +33,7 @@ jobs:
     # uses: MarkusJx/install-boost@36b7c6e
     
     - name: Install dependencies
-      run: choco install boost-msvc-14.1 && choco install sqlite
+      run: vcpkg install boost && vcpkg install sqlite3
 
     - uses: actions/checkout@v3
       with:
