@@ -40,7 +40,7 @@ int createSettingsFiles()
             cout << "Enter password: ";
 
             string input = takePasswdFromUser();
-            string encodedInput = encode64(input);
+            string encodedInput = base64_encode(input);
 
             SQLite::Database db(PROJECT_AUTH_PA, SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
 

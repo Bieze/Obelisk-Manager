@@ -29,7 +29,7 @@ int VerifyPass() {
 
     query.executeStep();
     string password = query.getColumn(2);
-    if (encode64(input) == password) {
+    if (base64_decode(input) == password) {
         ;
     } else {
         cout << "[1] Incorrect password!";

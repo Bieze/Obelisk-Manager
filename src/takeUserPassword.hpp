@@ -18,7 +18,9 @@ You should have received a copy of the GNU General Public License along with Obe
 #ifdef __MINGW32__
 #include <conio.h>
 #elif __linux
-#include <termios.h>
+#include "unix-getch.hpp"
+#elif __APPLE__
+#include "unix-getch.hpp"
 #endif
 
 
