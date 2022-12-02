@@ -14,7 +14,7 @@ You should have received a copy of the GNU General Public License along with Obe
 #include <boost/filesystem.hpp>
 #include <boost/program_options.hpp>
 #include "SettingsLocation.hpp"
-#include <SQLiteCPP/SQLiteCpp.h>
+#include <SQLiteCpp/SQLiteCpp.h>
 #include "VerifyPass.hpp"
 #include <iostream>
 #include "config.h"

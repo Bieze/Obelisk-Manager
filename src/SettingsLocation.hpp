@@ -11,13 +11,12 @@ Obelisk manager is distributed in the hope that it will be useful, but WITHOUT A
 You should have received a copy of the GNU General Public License along with Obelisk manager. If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include <conio.h>
 #include <iostream>
 #include "config.h"
 #include "base64.hpp"
 #include "takeUserPassword.hpp"
 #include <boost/filesystem.hpp>
-#include <SQLiteCpp/SQLiteCpp.h>
+#include "SQLiteCpp/SQLiteCpp.h"
 #include <boost/filesystem/fstream.hpp>
 
 using namespace std;
@@ -41,7 +40,7 @@ int createSettingsFiles()
             cout << "Enter password: ";
 
             string input = takePasswdFromUser();
-            string encodedInput = encode64(input);
+            string encodedInput = base64_encode(input);
 
             SQLite::Database db(PROJECT_AUTH_PA, SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
 

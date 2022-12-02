@@ -1,12 +1,17 @@
 cmake_minimum_required(VERSION 3.0.0)
-project(Obelisk VERSION 0.1.6 LANGUAGES CXX)
+project(Obelisk VERSION 0.1.8 LANGUAGES CXX)
 
 include(CTest)
 enable_testing()
 
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(SQLITECPP_RUN_CPPCHECK OFF CACHE BOOL "" FORCE)
+set(SQLITECPP_RUN_CPPLINT OFF CACHE BOOL "" FORCE)
+add_subdirectory(${PROJECT_SOURCE_DIR}/libs/SQLiteCpp)
 
 add_executable(Obelisk ${PROJECT_SOURCE_DIR}/src/main.cpp ${PROJECT_SOURCE_DIR}/src/SettingsLocation.hpp)
-
 add_test(NAME ObeliskRun COMMAND Obelisk)
 
 execute_process(
@@ -35,19 +40,21 @@ if(LINUX)
     file(TO_CMAKE_PATH $ENV{HOME}/.config/obelisk-manager CONFIG_DIR)
     file(TO_CMAKE_PATH $ENV{HOME}/.config/obelisk-manager/DATA.db3 AUTH_PA)
 elseif(WIN32)
-    # windows stuf here
+    # windows stuff here
     file(TO_CMAKE_PATH $ENV{LOCALAPPDATA}/obelisk-manager/ CONFIG_DIR)
     file(TO_CMAKE_PATH $ENV{LOCALAPPDATA}/obelisk-manager/DATA.db3 AUTH_PA)
+elseif(APPLE)
+    # macos stuff here
+    file(TO_CMAKE_PATH $ENV{HOME}/.config/obelisk-manager CONFIG_DIR)
+    file(TO_CMAKE_PATH $ENV{HOME}/.config/obelisk-manager/DATA.db3 AUTH_PA)
 endif()
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
+
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 
 find_package(Boost 1.71.0 REQUIRED COMPONENTS program_options filesystem)
 find_package(SQLite3 3.7.15 REQUIRED)
-find_package(SQLiteCpp 3.2.0 REQUIRED)
 
 
 
@@ -67,7 +74,6 @@ target_link_libraries(
     ${SQLite3_LIBRARIES}
     SQLiteCpp
 )
-
 
 include(CPack)
 

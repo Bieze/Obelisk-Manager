@@ -15,12 +15,14 @@ You should have received a copy of the GNU General Public License along with Obe
 #define TAKE_USER_PASS
 
 #include <iostream>
-
-#ifdef _WIN32
+#ifdef __MINGW32__
 #include <conio.h>
 #elif __linux
-#include <curses.h>
+#include "unix-getch.hpp"
+#elif __APPLE__
+#include "unix-getch.hpp"
 #endif
+
 
 using namespace std;
 

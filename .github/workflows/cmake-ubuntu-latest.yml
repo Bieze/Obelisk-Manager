@@ -19,9 +19,11 @@ jobs:
 
     steps:
     - name: Install dependencies
-      run: sudo apt-get install libboost-all-dev git libncurses5-dev libncursesw5-dev && cd /tmp && git clone https://github.com/SRombauts/SQLiteCpp.git && cd /tmp/SQLiteCpp && git submodule init && git submodule update && cmake -S . -B build -DCMAKE_INSTALL_PREFIX=/usr/local && cmake --build build && sudo cmake --install build
+      run: sudo apt-get install libboost-all-dev git
 
     - uses: actions/checkout@v3
+      with:
+        submodules: recursive
 
 
     - name: Configure CMake
