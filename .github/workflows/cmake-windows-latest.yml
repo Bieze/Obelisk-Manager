@@ -39,19 +39,15 @@ jobs:
 
     
     - name: Configure CMake
-    - shell: msys2 {0}
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
       run: mkdir build && cd build && cmake .. -G "MSYS Makefiles"
 
     - name: Build progarm
-    - shell: msys2 {0}
       # Build your program with the given configuration
       run: cd build && cmake --build .
 
     - name: Post-build tests
-    - shell: msys2 {0}
-
       run: cd build && ctest -j14 -C Debug -T test --output-on-failure
 
 
