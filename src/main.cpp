@@ -11,6 +11,7 @@ Obelisk manager is distributed in the hope that it will be useful, but WITHOUT A
 You should have received a copy of the GNU General Public License along with Obelisk manager. If not, see <https://www.gnu.org/licenses/>.
 */
 
+#include "AddPasswordToDatabase.hpp"
 #include <boost/filesystem.hpp>
 #include <boost/program_options.hpp>
 #include "SettingsLocation.hpp"
@@ -37,14 +38,18 @@ int main(int argc, char *argv[]) {
             ("help,h", "Display this help message")
             ("version,v", "Display the version number")
             ("forgot-password", "Help for what to do if you forgot your master password")
+            ("add,a", "Add a password to the database")
         ;
 
+        po::positional_options_description pos;
         po::variables_map vm;
 
         po::parsed_options parsed = po::command_line_parser(argc, argv).
             options(desc).
+            positional(pos).
             allow_unregistered().
             run();
+
         po::store(parsed, vm);
         
 
@@ -59,6 +64,9 @@ int main(int argc, char *argv[]) {
             cout << "If you forgot your password I suggest downloading the SQLite shell\n";
             cout << "Or an SQLite database viewer and decode the password to regain access.";
 
+        } else if (vm.count("add")) {
+            AddPasswordToDb();
+            
         }
     }
 

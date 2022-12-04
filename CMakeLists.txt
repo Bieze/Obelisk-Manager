@@ -56,8 +56,6 @@ set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 find_package(Boost 1.71.0 REQUIRED COMPONENTS program_options filesystem)
 find_package(SQLite3 3.7.15 REQUIRED)
 
-
-
 configure_file(
     ${PROJECT_SOURCE_DIR}/src/config.h.in
     ${PROJECT_SOURCE_DIR}/src/config.h

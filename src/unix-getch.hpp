@@ -1,8 +1,11 @@
+#ifndef UNIX_GETCH
+#define UNIX_GETCH
+
 #include <termios.h>
 #include <unistd.h>
 #include <iostream>
 
-int getch() {
+inline int getch() {
     struct termios oldt, newt;
     int ch;
     tcgetattr(STDIN_FILENO, &oldt);
@@ -13,3 +16,5 @@ int getch() {
     tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
     return ch;
 }
+
+#endif
