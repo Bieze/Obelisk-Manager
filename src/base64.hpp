@@ -5,6 +5,7 @@
 #include <boost/archive/iterators/base64_from_binary.hpp>
 #include <boost/archive/iterators/transform_width.hpp>
 #include <boost/algorithm/string.hpp>
+#include <sstream>
 
 
 inline const std::string base64_padding[] = {"", "==","="};
