@@ -19,7 +19,7 @@ You should have received a copy of the GNU General Public License along with Obe
 
 using namespace std;
 
-int AddPasswordToDb() {
+int DelPasswordFromDb() {
     string website;
     string username;
     string password;
@@ -29,8 +29,9 @@ int AddPasswordToDb() {
     cout << "Obelisk manager is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.\n";
     cout << "You should have received a copy of the GNU General Public License along with Obelisk manager. If not, see <https://www.gnu.org/licenses/>.\n";
 
-    cout << "\nPlease fill out each of the questions to be able to save the data\n";
+    cout << "\nPlease fill out each of the questions to be remove the data from the database.\n";
     cout << "NONE of the questions can be BLANK\n";
+    cout << "ONCE THIS DATA IS REMOVED IT CANNOT BE RESTORED\n";
 
     cout << "What is the name of the website or program?\n";
     cout << "Answer: ";
@@ -58,10 +59,10 @@ int AddPasswordToDb() {
             SQLite::Database db(PROJECT_AUTH_PA, SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
             SQLite::Transaction transaction(db);
 
-            db.exec("INSERT INTO passwords (website, username, password) VALUES ('" + base64_encode(website) + "','" + base64_encode(username) + "','" + base64_encode(password) + "');");
+            db.exec("DELETE FROM passwords WHERE website='" + base64_encode(website) + "' AND username='" + base64_encode(username) + "' AND password='" + base64_encode(password) + "';");
             transaction.commit();
 
-            cout << "Added data to database!";
+            cout << "Removed data from database!";
         } catch (exception &e) {
             cout << "[1] " << e.what() << endl;
             exit(1);

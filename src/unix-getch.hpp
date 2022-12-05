@@ -5,7 +5,7 @@
 #include <unistd.h>
 #include <iostream>
 
-inline int getch() {
+inline int _getch() {
     struct termios oldt, newt;
     int ch;
     tcgetattr(STDIN_FILENO, &oldt);

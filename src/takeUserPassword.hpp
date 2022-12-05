@@ -32,7 +32,7 @@ inline string takePasswdFromUser()
     char ipt_ch;
     while (true)
     {
-        ipt_ch = getch();
+        ipt_ch = _getch();
 
         // Check whether user enters
         // a special non-printable

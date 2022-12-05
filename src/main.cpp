@@ -16,6 +16,7 @@ You should have received a copy of the GNU General Public License along with Obe
 #include <boost/program_options.hpp>
 #include "SettingsLocation.hpp"
 #include <SQLiteCpp/SQLiteCpp.h>
+#include "DelPassword.hpp"
 #include "VerifyPass.hpp"
 #include <iostream>
 #include "config.h"
@@ -39,6 +40,7 @@ int main(int argc, char *argv[]) {
             ("version,v", "Display the version number")
             ("forgot-password", "Help for what to do if you forgot your master password")
             ("add,a", "Add a password to the database")
+            ("delete,d", "Delete a password from the database")
         ;
 
         po::positional_options_description pos;
@@ -67,6 +69,8 @@ int main(int argc, char *argv[]) {
         } else if (vm.count("add")) {
             AddPasswordToDb();
             
+        } else if (vm.count("delete")) {
+            DelPasswordFromDb();
         }
     }
 
