@@ -67,9 +67,11 @@ int main(int argc, char *argv[]) {
             cout << "Or an SQLite database viewer and decode the password to regain access.";
 
         } else if (vm.count("add")) {
+            VerifyPass();
             AddPasswordToDb();
             
         } else if (vm.count("delete")) {
+            VerifyPass();
             DelPasswordFromDb();
         }
     }
