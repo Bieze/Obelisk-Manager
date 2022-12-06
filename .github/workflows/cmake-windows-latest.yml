@@ -23,6 +23,7 @@ jobs:
 
 
     steps:
+    - name: Install dependencies and setup environment
     - uses: msys2/setup-msys2@v2
       with:
         release: false
@@ -30,12 +31,11 @@ jobs:
         install:
           git
           base-devel
-          mingw-w64-cmake
+          mingw-w64-x86_64-make
+          mingw-w64-x86_64-ninja
+          mingw-w64-x86_64-cmake
           mingw-w64-x86_64-boost
           mingw-w64-ucrt-x86_64-gcc
-    # - name: Download and install Boost
-    # You may pin to the exact commit or the version.
-    # uses: MarkusJx/install-boost@36b7c6e
 
     - uses: actions/checkout@v3
       with:
